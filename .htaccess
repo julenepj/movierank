@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /
+
+# Si la solicitud es para un archivo o directorio existente, se sirve normalmente
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Si no existe, se fuerza un error 404 para que se active ErrorDocument
+RewriteRule ^ - [R=404,L]
+
+# Especifica el documento de error 404 personalizado
+ErrorDocument 404 /error404.php
